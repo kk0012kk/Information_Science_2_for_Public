@@ -108,12 +108,12 @@ def renderStage(canvas, stage, offset, characterPosition):
             canvas.create_text(xCenter, yCenter, text=cell, font=("Helvetica", fontSize))
 
     if isGameOver:
-        canvas.create_text(canvasWidth // 2, canvasHeight // 3, text="GAME OVER", font=("Helvetica", 30), fill="red")
+        canvas.create_text(canvasWidth // 2, canvasHeight // 3, text="GAME OVER", font=("DotGothic16", 30), fill="red")
         showRetryButton()
         return
 
     if isGameClear:
-        canvas.create_text(canvasWidth // 2, canvasHeight // 3, text="CLEAR!", font=("Helvetica", 30), fill="green")
+        canvas.create_text(canvasWidth // 2, canvasHeight // 3, text="CLEAR!", font=("DotGothic16", 30), fill="green")
         showRetryButton()
         return
 
