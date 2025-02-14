@@ -145,7 +145,7 @@ def moveCharacterRight(event):
                 currentOffset += 1
             
             checkGameClear()
-            fall_step()
+            fallStep()
 
     renderStage(canvas, stage, currentOffset, characterX)
 
@@ -165,7 +165,7 @@ def moveCharacterLeft(event):
                 currentOffset = max(0, currentOffset - 1)
             
             checkGameClear()
-            fall_step()
+            fallStep()
 
     renderStage(canvas, stage, currentOffset, characterX)
 
@@ -184,23 +184,23 @@ def jumpCharacter(event):
 
     jumpOffsets = [1, 2, 3, 4, 5]
 
-    def jump_step(index):
+    def jumpStep(index):
         """ジャンプの1ステップ"""
         global characterY
         if index < len(jumpOffsets):
             targetY = floorY - jumpOffsets[index] - 1
             if isObstacle(stage, characterX, targetY):
-                fall_step()
+                fallStep()
                 return
             characterY = jumpOffsets[index]
             renderStage(canvas, stage, currentOffset, characterX)
-            root.after(80, lambda: jump_step(index + 1))
+            root.after(80, lambda: jumpStep(index + 1))
         else:
-            fall_step()
+            fallStep()
 
-    jump_step(0)
+    jumpStep(0)
 
-def fall_step():
+def fallStep():
     """キャラクターが床に着地するまで下降（穴に落ちたらゲームオーバー）"""
     global characterY, isJumping, isGameOver
 
@@ -216,12 +216,12 @@ def fall_step():
             renderStage(canvas, stage, currentOffset, characterX)
             return
         else:
-            root.after(70, fall_step)  # 次の落下ステップ
+            root.after(70, fallStep)  # 次の落下ステップ
     else:
         # **地面がある場合：通常の落下処理**
         if floorPos - characterY - 1 > 0 and not isObstacle(stage, characterX, floorPos - characterY):
             characterY -= 1  # 徐々に落下
-            root.after(70, fall_step)  # 次の落下処理をスケジュール
+            root.after(70, fallStep)  # 次の落下処理をスケジュール
         else:
             characterY = 0  # 地面に着地したら落下終了
             isJumping = False
